@@ -158,13 +158,10 @@ class Project():
           codenames = []
           for i in result:
                   codenames.append(i.text)
-         #   print(driver.find_elements(By.XPATH, xpath))
              #массив, в котором будет содержаться контент страниц устройств
           content_of_pages=[]
-        # print(codenames)
           for i in result:
                 content_of_pages.append(i.text)
-           # print(content_of_pages)
              #массив, в котором содержатся все ссылки на устройства
           links=[]
           names=[]
@@ -205,7 +202,6 @@ class Project():
                 #записываем всю информацию об устройстве в 1 строку
                 content = c.split()
                 content1 = ' '.join(content)
-                #print(content1)
                 year_of_release=re.search('[20]\d{3}', content1)
                 if result:
                     years.append(year_of_release.group(0))
@@ -246,7 +242,6 @@ class Project():
                     network1 = c[index_Network+7:index_Storage]
                     network1 = " ".join(network1.split())
                     network.append(network1)
-
                 if (content1.find('SD card')!=-1):
                     index_SD = c.find('SD card')
                     index_Screen = c.find('Screen')
@@ -339,7 +334,6 @@ class Project():
         print('FIND PATH', xpath)
         # находим остальные устройства по XPath
         result = driver.find_elements(By.XPATH, xpath)
-        #print(driver.find_elements(By.XPATH, xpath))
         # массив, в котором содержатся все ссылки на производителей устройств
         links = []
         # список моделей устройств одного производителя
@@ -347,7 +341,6 @@ class Project():
 
         for i in result:
             links.append(i.get_attribute("href"))
-       # print(links)
         # находим информацию о каждом устройстве
           #считываем все ссылки на устройства
         for j in links:
@@ -359,9 +352,7 @@ class Project():
             links2=[]
             #список моделей устройств одного производителя
             models=[]
-
             links_of_devices=soup.find_all("strong")
-        #    print(links_of_devices)
             for link in links_of_devices:
                 links2.append(link.find("a").get("href"))
                 models.append((link.find("a").text))
@@ -419,7 +410,6 @@ class Project():
 
         for i in result:
             links.append(i.get_attribute("href"))
-       # print(links)
         # находим информацию о каждом устройстве
           #считываем все ссылки на устройства
         for j in links:
@@ -433,14 +423,11 @@ class Project():
             models=[]
 
             links_of_devices=soup.find_all("strong")
-        #    print(links_of_devices)
             for link in links_of_devices:
                 links2.append(link.find("a").get("href"))
                 models.append((link.find("a").text))
             models1.extend(models)   #добавить список моделей одного производителя к списку моделей всех производителей
-     #   print(models1)
      #   for model in models:
-        #   print(model)
           #  for i in links2:
            #     URL="https://twrp.me"+i
             #    session = requests.Session()
@@ -449,7 +436,6 @@ class Project():
            #     c = soup.text
           #      # записываем всю информацию об устройстве в 1 строку
            #     content = c.split()
-         #       print(content)
       storage = FileStorage.FileStorage('parametres_of_device.fs')  # создаем файл models.fs
       db = DB(storage)
       connection = db.open()  # открываем БД
@@ -464,7 +450,6 @@ class StdMobileDevice():
         self.params = {}
         for key in kwargs:
             self.params[key] = kwargs[key]
-            #print("key = {0}, value = {1}".format(key, kwargs[key]))
 
 
 projects = {}
